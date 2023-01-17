@@ -56,7 +56,7 @@ def test_main():
         'FI' : 'SCA',
         'FR' : 'WEU',
         'DE' : 'WEU',
-        'GR' : 'WEU',
+        'EL' : 'WEU',
         'HU' : 'EEU',
         'IE' : 'WEU',
         'IT' : 'WEU',
