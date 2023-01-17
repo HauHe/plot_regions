@@ -17,7 +17,7 @@ import os
 
 DATA_DIR = 'data'
 
-def main(regions):
+def main(regions, path: str):
     """
 
     Arguments
@@ -39,7 +39,7 @@ def main(regions):
     ax.set_xlim(0.2e7, 0.8e7)
     ax.set_ylim(1.2e6, 5.6e6)
     ax.axis('off')
-    fig.savefig('example.png', bbox_inches='tight')
+    fig.savefig(path, bbox_inches='tight')
 
 
 def test_main():
