@@ -11,6 +11,7 @@ png file
 """
 
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 import pandas as pd
 import geopandas as gpd
 import os
@@ -29,17 +30,23 @@ def main(regions, path: str):
     gdf_rg = gpd.read_file(path_rg)
     gdf_rg.crs = "EPSG:3035"
 
+    one_color_map = ListedColormap('lightskyblue')
+
     gdf_rg = gdf_rg[gdf_rg.LEVL_CODE == 0]
 
     gdf_rg['region'] = gdf_rg.CNTR_CODE.map(regions)
 
     fig, ax = plt.subplots()
-    gdf_rg.plot(gdf_rg.region, ax=ax, figsize=(20,15), cmap='Accent',
-                missing_kwds={'color': 'lightgrey'}, legend=True)
+    if list(regions.keys())[0] == regions[list(regions.keys())[0]]:
+        gdf_rg.plot(gdf_rg.region, ax=ax, figsize=(20,15), cmap=one_color_map,
+                    missing_kwds={'color': 'lightgrey'}, edgecolor='black')
+    else:
+        gdf_rg.plot(gdf_rg.region, ax=ax, figsize=(20,15), cmap='Set1',
+                    missing_kwds={'color': 'lightgrey'}, legend=True)
     ax.set_xlim(0.2e7, 0.8e7)
     ax.set_ylim(1.2e6, 5.6e6)
     ax.axis('off')
-    fig.savefig(path, bbox_inches='tight')
+    fig.savefig(path, dpi=300, bbox_inches='tight')
 
 
 def test_main():
